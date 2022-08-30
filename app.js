@@ -8,30 +8,28 @@ switch (accion) {
     let lista = archivoTareas.leerArchivo();
     console.log("Listado de tareas");
     console.log("----------------------------------------");
-    lista.forEach((element, index) => {
-      console.log(`${index + 1}. ${element.titulo} - ${element.estado}`);
-    });
+    archivoTareas.imprimirArray(lista);
     console.log("----------------------------------------");
     break;
   case "crear":
+    archivoTareas.escribirJSON(data);
     console.log(`Tarea ${data} creada con exito.`);
     console.log("----------------------------------------");
     break;
   case "filtrar":
+    let filtrado = archivoTareas.filtrarPorEstado(data);
     console.log(`Tareas filtradas por estado: ${data}`);
     console.log("----------------------------------------");
-    let filtrado = archivoTareas.filtrarPorEstado(data);
-    filtrado.forEach((element, index) => {
-      console.log(`${index + 1}. ${element.titulo} - ${element.estado}`);
-    });
+    archivoTareas.imprimirArray(filtrado);
     console.log("----------------------------------------");
     break;
   case undefined:
     console.log("----------------------------------------");
     console.log("Atención - Tienes que pasar una acción.");
-    console.log(
-      "Las acciones disponibles son: listar o crear 'titulo de la tarea nueva'"
-    );
+    console.log("Las acciones disponibles son:");
+    console.log("- listar");
+    console.log("- crear 'titulo de la tarea nueva'");
+    console.log("- filtrar 'estado' (pendiente/en progreso/terminada)");
     console.log("----------------------------------------");
     break;
   default:

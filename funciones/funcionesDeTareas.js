@@ -2,12 +2,14 @@ const fs = require("fs");
 
 let archivoTareas = {
   archivo: "./tareas.json",
-  selector: function (array, callback) {
-    return callback(array);
-  },
   leerArchivo: function () {
     let tareas = fs.readFileSync(this.archivo, "utf-8");
     return JSON.parse(tareas);
+  },
+  imprimirArray: function (array) {
+    array.forEach((element, index) => {
+      console.log(`${index + 1}. ${element.titulo} - ${element.estado}`);
+    });
   },
   escribirJSON: function (data) {
     let json = this.leerArchivo();
